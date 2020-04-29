@@ -5,7 +5,7 @@ import requests
 URI = 'https://jsonplaceholder.typicode.com'
 
 
-def get(endpoint: str) -> Dict[str, any]:
+def get(endpoint: str) -> requests.Response:
     """Retrieves resource from jsonplaceholder at given endpoint.
 
     Args:
@@ -14,10 +14,10 @@ def get(endpoint: str) -> Dict[str, any]:
     Returns:
         JSON Representation of the resource.
     """
-    pass
+    return requests.get(f'{URI}{endpoint}')
 
 
-def post(endpoint: str, body: Dict[str, any]) -> Dict[str, any]:
+def post(endpoint: str, body: Dict[str, any]) -> requests.Response:
     """Posts resource to jsonplaceholder at given endpoint. 
 
     Args:
@@ -27,10 +27,13 @@ def post(endpoint: str, body: Dict[str, any]) -> Dict[str, any]:
     Returns:
         JSON Representation of the resource.
     """
-    pass
+    headers = {
+        'Content-Type': 'application/json; charset=UTF-8'
+    }
+    return requests.post(f'{URI}{endpoint}', json=body, headers=headers)
 
 
-def put(endpoint: str, body: Dict[str, any]) -> Dict[str, any]:
+def put(endpoint: str, body: Dict[str, any]) -> requests.Response:
     """Updates resource in jsonplaceholder at given endpoint.
 
     Args:
@@ -40,14 +43,17 @@ def put(endpoint: str, body: Dict[str, any]) -> Dict[str, any]:
     Returns:
         JSON Representation of the resource.
     """
-    pass
+    headers = {
+        'Content-Type': 'application/json; charset=UTF-8'
+    }
+    return requests.put(f'{URI}{endpoint}', json=body, headers=headers)
 
 
-def delete(endpoint: str) -> Dict[str, any]:
+def delete(endpoint: str) -> requests.Response:
     """
     Deletes resource from jsonplaceholder at given endpoint.
 
     Returns:
         JSON Representation of the resource.
     """
-    pass
+    return requests.delete(f'{URI}{endpoint}')

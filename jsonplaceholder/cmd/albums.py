@@ -37,7 +37,7 @@ def get(id: int):
     """
     response: requests.Response = rest.get(f'{ENDPOINT}/{id}')
     if response.status_code != 200:
-        util.panic(f"Request resulted in error code {response.status_code}")
+        util.panic('Failure to retrieve resource.')
     typer.echo(view_album(response.json()))
 
 

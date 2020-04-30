@@ -19,11 +19,12 @@ def view_album(album: Dict[str, Union[int, str]]) -> str:
 
 
 @app.command()
-def list():
+def list(userId: int = typer.Option(None, help='Get albums only from the given user.', min=1)):
     """
     List all Albums.
     """
-    response: requests.Response = rest.get(ENDPOINT)
+    uri = ENDPOINT if not userId else f'{ENDPOINT}?userId={userId}'
+    response: requests.Response = rest.get(uri)
     if response.status_code != 200:
         util.panic(f"Request resulted in error code {response.status_code}")
     albums = response.json()
@@ -31,7 +32,7 @@ def list():
 
 
 @app.command()
-def get(id: int):
+def get(id: int = typer.Argument(..., min=1)):
     """
     Get info about album by ID.
     """
@@ -42,7 +43,7 @@ def get(id: int):
 
 
 @app.command()
-def delete(id: int):
+def delete(id: int = typer.Argument(..., min=1)):
     """
     Delete an album by ID.
     """
@@ -53,7 +54,7 @@ def delete(id: int):
 
 
 @app.command()
-def update(id: int,
+def update(id: int = typer.Argument(..., min=1),
            userId: int = typer.Option(None, help='ID of the user.'),
            title: str = typer.Option(None, help='Title of the album.'),
            ):
@@ -73,7 +74,7 @@ def update(id: int,
 
 
 @app.command()
-def create(userId: int = typer.Option(..., help='ID of the user.'),
+def create(userId: int = typer.Option(..., help='ID of the user.', min=1),
            title: str = typer.Option(..., help='Title of the album.'),
            ):
     """

@@ -29,7 +29,8 @@ def test_list_extra_args():
 def test_list_userid():
     result = runner.invoke(albums.app, ['list', '--userid', '1'])
     assert result.exit_code == 0
-    assert len(result.output.splitlines()) == 11
+    assert len([line for line in result.output.splitlines()
+                if line.startswith('id=')]) == 10
 
 
 def test_list_out_of_range_userid():

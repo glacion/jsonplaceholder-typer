@@ -19,9 +19,11 @@ def view_album(album: Dict[str, Union[int, str]]) -> str:
 
 
 @app.command()
-def list(userId: int = typer.Option(None, help='Get albums only from the given user.', min=1)):
+def list(userId: int = typer.Option(None,
+                                    help='Get albums only from the given user.',
+                                    min=1,)):
     """
-    List all Albums.
+    List Albums.
     """
     uri = ENDPOINT if not userId else f'{ENDPOINT}?userId={userId}'
     response: requests.Response = rest.get(uri)
@@ -82,8 +84,12 @@ def create(userId: int = typer.Option(..., help='ID of the user.', min=1),
     """
     Create a new album.
     """
+    album = {
+        'userId': userId,
+        'title': title
+    }
     response: requests.Response = rest.post(
-        f'{ENDPOINT}', {'userId': userId, 'title': title})
+        ENDPOINT, album)
     if response.status_code != 201:
         util.panic('Failure to create resource.')
     typer.echo(view_album(response.json()))

@@ -65,8 +65,10 @@ def update(id: int = typer.Argument(..., min=1),
     if album_response.status_code != 200:
         util.panic('Failure to retrieve resource.')
     album = album_response.json()
-    album['userId'] = userId or album['userId']
-    album['title'] = title or album['title']
+    album = {
+        'userId': userId or album['userId'],
+        'title': title or album['title']
+    }
     response = rest.put(f'{ENDPOINT}/{id}', album)
     if response.status_code != 200:
         util.panic('Failure to update resource.')

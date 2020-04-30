@@ -2,10 +2,43 @@ import typer
 
 app = typer.Typer()
 
+ENDPOINT = '/posts'
 
-@app.command()
+
+def view_post(comment: Dict[str, Union[int, str]]) -> str:
+    pass
+
+
+@app.command
+def list():
+    pass
+
+
+@app.command
+def get():
+    pass
+
+
+@app.command
+def delete():
+    pass
+
+
+@app.command
+def update():
+    pass
+
+
+@app.command
+def create():
+    pass
+
+
+@app.callback()
 def main():
-    typer.echo("Posts")
+    """
+    Manage Posts
+    """
 
 
 if __name__ == '__main__':

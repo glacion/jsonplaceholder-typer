@@ -24,7 +24,8 @@ def view_comment(comment: Dict[str, Union[int, str]]) -> str:
 @app.command()
 def list(postId: int = typer.Option(None,
                                     help='Get comments only from the given post.',
-                                    min=1,)):
+                                    min=1,)
+         ):
     """
     List Comments.
     """

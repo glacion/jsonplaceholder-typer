@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jsonplaceholder"
-version = "0.1.0"
+version = "1.0.0"
 description = "Demo CLI app which uses jsonplaceholder to demonstrate Typer."
 authors = ["Ahmetcan Güvendiren <ahm@glacion.com>"]
 license = "GPL-3.0-or-later"
